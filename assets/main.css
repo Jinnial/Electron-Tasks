@@ -1,0 +1,12 @@
+body{
+    background-image: url("backing.jpg");
+    background-size: 900px 700px;
+}
+
+.card{
+    background-color: rgba(94,36,92, .8);
+    width: 75%;
+    border-radius: 7px;
+    margin-top: 2em;
+    color: whitesmoke;
+}
