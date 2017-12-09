@@ -9,9 +9,9 @@ const ipc = electron.ipcMain;
 app.on('ready', _=>{
     console.log('Browser window is ready....');
     mainWindow = new BrowserWindow({
-        width: 900,
-        height: 700,
-        resizable: false
+        // width: 900,
+        // height: 700,
+        // resizable: false
     });
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     mainWindow.on('close', _=>{

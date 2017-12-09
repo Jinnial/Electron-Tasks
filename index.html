@@ -3,18 +3,68 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Task Tracker</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
 
-    <!-- Personal Styles -->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
+    <!-- Material Icon CDN -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Path of the materialize.min.css file -->
+    <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
+    <!-- Custom css file path -->
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-    <!-- 3rd Party Libraries -->
-    <script src="https://unpkg.com/vue"></script>
+    
+    <header> 
+        <nav class="deep-purple lighten-1"> <!-- Color of Nav Bar -->
+            <div class="nav-wrapper">
+                <div class="container">
+
+                    <!-- Site Heading -->
+                    <a href="#" class="brand-logo">Task Manager</a>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+        <div class="container">
+            <div class="card-panel teal">
+                <span class="white-text">Hey there! Using this app you can track your todo list using a JSON file and have it read in! You can use the button at the bottom of the page to edit your tasks and manage this app.</span>
+            </div>
+        </div>
+        
+
+        <div class="fixed-action-btn horizontal">
+            <a class="btn-floating btn-large red">
+                <i class="large material-icons">mode_edit</i>
+            </a>
+            <ul>
+                <li><a class="btn-floating pink lighten-1"><i class="material-icons">add_circle</i></a></li>
+                <li><a class="btn-floating green"><i class="material-icons">fiber_new</i></a></li>
+                <li><a class="btn-floating orange"><i class="material-icons">save</i></a></li>
+                <li><a class="btn-floating blue"><i class="material-icons">folder_open</i></a></li>
+            </ul>
+        </div>
+            
+    </main>
+
+    <!-- The jQuery file path -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- Path of the materialize.js file -->
+    <script src="js/hammer.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script>
+        $("document").ready(function () {
+            $(".button-collapse").sideNav();
+        });
+    </script>
+
 </body>
 
 </html>
