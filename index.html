@@ -32,23 +32,62 @@
 
     <main>
         
+        <!-- Description Card -->
         <div class="container">
             <div class="card-panel teal">
                 <span class="white-text">Hey there! Using this app you can track your todo list using a JSON file and have it read in! You can use the button at the bottom of the page to edit your tasks and manage this app.</span>
             </div>
         </div>
-        
 
-        <div class="fixed-action-btn horizontal">
-            <a class="btn-floating btn-large red">
-                <i class="large material-icons">mode_edit</i>
-            </a>
-            <ul>
-                <li><a class="btn-floating pink lighten-1"><i class="material-icons">add_circle</i></a></li>
-                <li><a class="btn-floating green"><i class="material-icons">fiber_new</i></a></li>
-                <li><a class="btn-floating orange"><i class="material-icons">save</i></a></li>
-                <li><a class="btn-floating blue"><i class="material-icons">folder_open</i></a></li>
+        <!-- Page Content -->
+        <div class="container">
+
+            <!-- Collection List -->
+            <ul class="collection" id="tasks" hidden>
+                
             </ul>
+        
+        
+            <!-- Edits Manager -->
+            <div class="fixed-action-btn horizontal">
+                <a class="btn-floating btn-large red">
+                    <i class="large material-icons">mode_edit</i>
+                </a>
+                <ul>
+                    <li><a class="btn-floating pink lighten-1 btn modal-trigger" href="#addItem"><i class="material-icons">add_circle</i></a></li>
+                    <li><button class="btn-floating green btn modal-trigger" href="#"><i class="material-icons">fiber_new</i></button></li>
+                    <li><button class="btn-floating orange btn modal-trigger" href="#"><i class="material-icons">save</i></button></li>
+                    <li><button class="btn-floating blue btn modal-trigger" href="#openFile"><i class="material-icons">folder_open</i></button></li>
+                </ul>
+            </div>
+
+            <!-- Add Item -->
+            <div id="addItem" class="modal">
+                <div class="modal-content">
+                <h4>Add Item</h4>
+                <p>What task do you need to complete?</p>
+                </div>
+                <div class="modal-footer">
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                </div>
+            </div>
+
+            <!-- Open File -->
+            <div id="openFile" class="modal">
+                <form action="#">
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </form>
+                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+
         </div>
             
     </main>
@@ -64,6 +103,9 @@
             $(".button-collapse").sideNav();
         });
     </script>
+
+    <!-- Custom Javascript -->
+    <script src="js/taskManager.js"></script>
 
 </body>
 

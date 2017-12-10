@@ -9,6 +9,7 @@ const ipc = electron.ipcMain;
 app.on('ready', _=>{
     console.log('Browser window is ready....');
     mainWindow = new BrowserWindow({
+        icon: __dirname + '/images/icon.png'
         // width: 900,
         // height: 700,
         // resizable: false
