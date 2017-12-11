@@ -32,7 +32,11 @@ var app = new Vue({
             this.tasks.items[pos].completed = true;
             updateView();
         },
-        
+        newList(){
+            this.tasks = { "items": [] };
+            ipc.send('save-json', { "items": [] });
+            updateView();
+        }
     }
 });
 
@@ -43,7 +47,7 @@ document.getElementById("openFileSubmit").addEventListener('click', _=>{
 });
 
 document.getElementById('saveFileSubmit').addEventListener('click', _=>{
-    ipc.send('save-json', app.tasks.items);
+    ipc.send('save-json', app.tasks);
 })
 
 //Recieve Array of Objects 

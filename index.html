@@ -59,7 +59,7 @@
                 </a>
                 <ul>
                     <li><a class="btn-floating pink lighten-1 btn modal-trigger" href="#addItem"><i class="material-icons">add_circle</i></a></li>
-                    <li><a class="btn-floating green btn modal-trigger" href="#"><i class="material-icons">fiber_new</i></a></li>
+                    <li><a class="btn-floating green btn modal-trigger" href="#newList"><i class="material-icons">fiber_new</i></a></li>
                     <li><a class="btn-floating orange btn modal-trigger" href="#saveList"><i class="material-icons">save</i></a></li>
                     <li><a class="btn-floating blue btn modal-trigger" href="#openFile"><i class="material-icons">folder_open</i></a></li>
                 </ul>
@@ -99,6 +99,17 @@
                 </div>
                 <div class="modal-footer">
                     <button id="openFileSubmit" class="modal-action modal-close waves-effect waves-green btn-flat">Open</button>
+                </div>
+            </div>
+
+            <!-- New List -->
+            <div id="newList" class="modal">
+                <div class="modal-content">
+                    <h4>New List</h4>
+                    <p>Are you sure you want to create a new list? All data will be lost from your currernt list and will not be recoverable.</p>
+                </div>
+                <div class="modal-footer">
+                    <button v-on:click="newList" class="modal-action modal-close waves-effect waves-green btn-flat">Continue</button>
                 </div>
             </div>
 

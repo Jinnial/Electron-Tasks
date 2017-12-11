@@ -31,7 +31,7 @@ ipc.on('open-json', (event, path)=>{
 });
 ipc.on('save-json', (event, list) =>{
     console.log(list);
-    var file = `file://${__dirname}/tasks.json`;
+    var file = `${__dirname}/tasks.json`;
     console.log(file);
-    fs.writeFile(file, list, function(){console.log('File Writen Sucessfully....')});
+    fs.writeFileSync(file, JSON.stringify(list));
 });
