@@ -24,7 +24,10 @@ app.on('ready', _=>{
 
 //Listeners
 ipc.on('open-json', (event, args)=>{
+    console.log(args);
     var file = json.read(args);
+    console.log(file);
     var obj = file.get('items');
+    console.log(obj);
     mainWindow.webContents.send('obtain-file-content', obj);
 });

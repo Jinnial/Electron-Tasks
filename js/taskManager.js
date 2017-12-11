@@ -42,7 +42,7 @@ document.getElementById("openFileSubmit").addEventListener('click', _=>{
 
 //Recieve Array of Objects 
 ipc.on('obtain-file-content', (event, args) =>{
-    this.items = args;
+    app.items = args;
     updateView();
 });
 
