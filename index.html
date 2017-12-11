@@ -44,15 +44,14 @@
 
             <!-- Collection List -->
             <ul class="collection" id="tasks">
-                <ul v-for="item in items">
+                <ul v-for="item in tasks.items">
                     <li class="collection-item" v-if="item.completed == false">
                         {{item.name}}
                         <a v-on:click="removeItem(item.id)" href="#" class="secondary-content"><i class="material-icons">check</i></a>
                     </li>
                 </ul>
             </ul>
-        
-        
+    
             <!-- Edits Manager -->
             <div class="fixed-action-btn horizontal">
                 <a class="btn-floating btn-large red">
@@ -61,7 +60,7 @@
                 <ul>
                     <li><a class="btn-floating pink lighten-1 btn modal-trigger" href="#addItem"><i class="material-icons">add_circle</i></a></li>
                     <li><a class="btn-floating green btn modal-trigger" href="#"><i class="material-icons">fiber_new</i></a></li>
-                    <li><a class="btn-floating orange btn modal-trigger" href="#"><i class="material-icons">save</i></a></li>
+                    <li><a class="btn-floating orange btn modal-trigger" href="#saveList"><i class="material-icons">save</i></a></li>
                     <li><a class="btn-floating blue btn modal-trigger" href="#openFile"><i class="material-icons">folder_open</i></a></li>
                 </ul>
             </div>
@@ -85,17 +84,32 @@
 
             <!-- Open File -->
             <div id="openFile" class="modal">
-                <div class="file-field input-field">
-                    <div class="btn">
-                        <span>File</span>
-                        <input id="fileInput" type="file">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <input class="file-path validate" type="text">
+                <div class="modal-content file-field input-field">
+                    <h4>Open File</h4>
+                    <p>What file would you like to open?</p>
+                    <div class="row">
+                        <div class="btn">
+                            <span>File</span>
+                            <input id="fileInput" type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button id="openFileSubmit" class="modal-action modal-close waves-effect waves-green btn-flat">Open</button>
+                </div>
+            </div>
+
+            <!-- Save List -->
+            <div id="saveList" class="modal">
+                <div class="modal-content">
+                    <h4>Save List</h4>
+                    <p>Are you sure you want to save this file?</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveFileSubmit" class="modal-action modal-close waves-effect waves-green btn-flat">Yes</button>
                 </div>
             </div>
 

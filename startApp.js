@@ -5,6 +5,7 @@ const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const ipc = electron.ipcMain;
 var json = require('json-file');
+var fs =  require('fs');
 
 //Create Tasks Menu
 app.on('ready', _=>{
@@ -23,11 +24,14 @@ app.on('ready', _=>{
 });
 
 //Listeners
-ipc.on('open-json', (event, args)=>{
-    console.log(args);
-    var file = json.read(args);
-    console.log(file);
+ipc.on('open-json', (event, path)=>{
+    var file = json.read(path);
     var obj = file.get('items');
-    console.log(obj);
     mainWindow.webContents.send('obtain-file-content', obj);
+});
+ipc.on('save-json', (event, list) =>{
+    console.log(list);
+    var file = `file://${__dirname}/tasks.json`;
+    console.log(file);
+    fs.writeFile(file, list, function(){console.log('File Writen Sucessfully....')});
 });

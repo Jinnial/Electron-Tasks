@@ -16,18 +16,20 @@ var app = new Vue({
     el: "#app",
     data: {
         //Name, Completed
-        items: [
-            {name: "Complete Final Project", completed: false, id: 0}
-        ]
+        tasks:{
+            items: [
+                {name: "Complete Final Project", completed: false, id: 0}
+            ]
+        }
     },
     methods: {
         addItem(){
             var taskEntry = $("#taskEntry")[0].value;
-            this.items.push({name: taskEntry, completed: false, id: this.items.length});
+            this.tasks.items.push({name: taskEntry, completed: false, id: this.tasks.items.length});
             updateView();
         },
         removeItem(pos){
-            this.items[pos].completed = true;
+            this.tasks.items[pos].completed = true;
             updateView();
         },
         
@@ -37,19 +39,23 @@ var app = new Vue({
 //Navigation Buttons
 document.getElementById("openFileSubmit").addEventListener('click', _=>{
     var path = $('#fileInput')[0].files[0].path;
-    ipc.send('open-json', path)
+    ipc.send('open-json', path);
 });
+
+document.getElementById('saveFileSubmit').addEventListener('click', _=>{
+    ipc.send('save-json', app.tasks.items);
+})
 
 //Recieve Array of Objects 
 ipc.on('obtain-file-content', (event, args) =>{
-    app.items = args;
+    app.tasks.items = args;
     updateView();
 });
 
 //Update Form
 function updateView(){
     var empty = true;
-    app.items.forEach(function(item) {
+    app.tasks.items.forEach(function(item) {
         if (item.completed == false){
             empty = false;
         }
