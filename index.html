@@ -30,7 +30,7 @@
         </nav>
     </header>
 
-    <main>
+    <main id ="app">
         
         <!-- Description Card -->
         <div class="container">
@@ -43,8 +43,13 @@
         <div class="container">
 
             <!-- Collection List -->
-            <ul class="collection" id="tasks" hidden>
-                
+            <ul class="collection" id="tasks">
+                <ul v-for="item in items">
+                    <li class="collection-item" v-if="item.completed == false">
+                        {{item.name}}
+                        <a href="#!" class="secondary-content"><i class="material-icons">check</i></a>
+                    </li>
+                </ul>
             </ul>
         
         
@@ -68,7 +73,7 @@
                 <p>What task do you need to complete?</p>
                 </div>
                 <div class="modal-footer">
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+                <button v-on:click="addItem" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</button>
                 </div>
             </div>
 
@@ -85,7 +90,7 @@
                         </div>
                     </div>
                 </form>
-                <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                <button href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</button>
             </div>
 
         </div>
@@ -105,6 +110,7 @@
     </script>
 
     <!-- Custom Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="js/taskManager.js"></script>
 
 </body>
