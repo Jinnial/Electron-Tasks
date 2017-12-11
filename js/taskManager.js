@@ -17,15 +17,47 @@ var app = new Vue({
     data: {
         //Name, Completed
         items: [
-            {name: "Complete Final Project", completed: false}
+            {name: "Complete Final Project", completed: false, id: 0}
         ]
     },
     methods: {
-        addItem(task){
-            this.items.push({name: task, completed: false})
+        addItem(){
+            var taskEntry = $("#taskEntry")[0].value;
+            this.items.push({name: taskEntry, completed: false, id: this.items.length});
+            updateView();
         },
-        removeItem(){
-            alert('Removing Item....')
-        }
+        removeItem(pos){
+            this.items[pos].completed = true;
+            updateView();
+        },
+        
     }
 });
+
+//Navigation Buttons
+document.getElementById("openFileSubmit").addEventListener('click', _=>{
+    var path = $('#fileInput')[0].files[0].path;
+    ipc.send('open-json', path)
+});
+
+//Recieve Array of Objects 
+ipc.on('obtain-file-content', (event, args) =>{
+    this.items = args;
+    updateView();
+});
+
+//Update Form
+function updateView(){
+    var empty = true;
+    app.items.forEach(function(item) {
+        if (item.completed == false){
+            empty = false;
+        }
+    }, this);
+    if(empty == true){
+        $('#tasks').hide()
+    }
+    else{
+        $('#tasks').show()
+    }
+}

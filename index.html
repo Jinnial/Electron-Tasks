@@ -11,8 +11,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Path of the materialize.min.css file -->
     <link rel="stylesheet" href="css/materialize.min.css" media="screen,projection">
-    <!-- Custom css file path -->
-    <link rel="stylesheet" href="css/main.css">
+    <!-- Custom css file path 
+    <link rel="stylesheet" href="css/main.css"> -->
 </head>
 
 <body>
@@ -47,7 +47,7 @@
                 <ul v-for="item in items">
                     <li class="collection-item" v-if="item.completed == false">
                         {{item.name}}
-                        <a href="#!" class="secondary-content"><i class="material-icons">check</i></a>
+                        <a v-on:click="removeItem(item.id)" href="#" class="secondary-content"><i class="material-icons">check</i></a>
                     </li>
                 </ul>
             </ul>
@@ -60,37 +60,43 @@
                 </a>
                 <ul>
                     <li><a class="btn-floating pink lighten-1 btn modal-trigger" href="#addItem"><i class="material-icons">add_circle</i></a></li>
-                    <li><button class="btn-floating green btn modal-trigger" href="#"><i class="material-icons">fiber_new</i></button></li>
-                    <li><button class="btn-floating orange btn modal-trigger" href="#"><i class="material-icons">save</i></button></li>
-                    <li><button class="btn-floating blue btn modal-trigger" href="#openFile"><i class="material-icons">folder_open</i></button></li>
+                    <li><a class="btn-floating green btn modal-trigger" href="#"><i class="material-icons">fiber_new</i></a></li>
+                    <li><a class="btn-floating orange btn modal-trigger" href="#"><i class="material-icons">save</i></a></li>
+                    <li><a class="btn-floating blue btn modal-trigger" href="#openFile"><i class="material-icons">folder_open</i></a></li>
                 </ul>
             </div>
 
             <!-- Add Item -->
             <div id="addItem" class="modal">
                 <div class="modal-content">
-                <h4>Add Item</h4>
-                <p>What task do you need to complete?</p>
+                    <h4>Add Item</h4>
+                    <p>What task do you need to complete?</p>
+                     <div class="row">
+                        <div class="input-field col s12">
+                            <input value="Complete MTA Exam" id="taskEntry" type="text" class="validate">
+                            <label for="taskEntry">Task Description</label>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
-                <button v-on:click="addItem" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</button>
+                    <button v-on:click="addItem" class="modal-action modal-close waves-effect waves-green btn-flat">Submit</button>
                 </div>
             </div>
 
             <!-- Open File -->
             <div id="openFile" class="modal">
-                <form action="#">
-                    <div class="file-field input-field">
-                        <div class="btn">
-                            <span>File</span>
-                            <input type="file">
-                        </div>
-                        <div class="file-path-wrapper">
-                            <input class="file-path validate" type="text">
-                        </div>
+                <div class="file-field input-field">
+                    <div class="btn">
+                        <span>File</span>
+                        <input id="fileInput" type="file">
                     </div>
-                </form>
-                <button href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</button>
+                    <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="openFileSubmit" class="modal-action modal-close waves-effect waves-green btn-flat">Open</button>
+                </div>
             </div>
 
         </div>

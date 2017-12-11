@@ -4,6 +4,7 @@ const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const ipc = electron.ipcMain;
+var json = require('json-file');
 
 //Create Tasks Menu
 app.on('ready', _=>{
@@ -19,4 +20,11 @@ app.on('ready', _=>{
         console.log('Browser has been closed....');
         mainWindow = null;
     })
+});
+
+//Listeners
+ipc.on('open-json', (event, args)=>{
+    var file = json.read(args);
+    var obj = file.get('items');
+    mainWindow.webContents.send('obtain-file-content', obj);
 });
