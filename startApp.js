@@ -54,9 +54,9 @@ ipc.on('open-json', (event, path)=>{
     var obj = file.get('items');
     mainWindow.webContents.send('obtain-file-content', obj);
 });
-ipc.on('save-json', (event, list) =>{
-    console.log(list);
-    var file = `${__dirname}/tasks.json`;
+ipc.on('save-json', (event, args) =>{
+    console.log(args[0]);
+    var file = `${args[1]}`;
     console.log(file);
-    fs.writeFileSync(file, JSON.stringify(list));
+    fs.writeFileSync(file, JSON.stringify(args[0]));
 });

@@ -2,36 +2,36 @@
 const electron = require('electron');
 var app = require('electron').remote;
 var dialog = app.dialog;
-var fs =  require('fs');
+var fs = require('fs');
 const ipc = electron.ipcRenderer;
 
 //Load Modals
-$(document).ready(function(){
+$(document).ready(function () {
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
     loadData(__dirname + '/tasks.json');
-  });
+});
 
 //Vue.js
 var app = new Vue({
     el: "#app",
     data: {
         //Name, Completed
-        tasks:{
+        tasks: {
             items: []
         }
     },
     methods: {
-        addItem(){
+        addItem() {
             var taskEntry = $("#taskEntry")[0].value;
-            this.tasks.items.push({name: taskEntry, completed: false, id: this.tasks.items.length});
+            this.tasks.items.push({ name: taskEntry, completed: false, id: this.tasks.items.length });
             updateView();
         },
-        removeItem(pos){
+        removeItem(pos) {
             this.tasks.items[pos].completed = true;
             updateView();
         },
-        newList(){
+        newList() {
             this.tasks = { "items": [] };
             ipc.send('save-json', { "items": [] });
             updateView();
@@ -40,52 +40,55 @@ var app = new Vue({
 });
 
 //Navigation Buttons
-document.getElementById("openFileSubmit").addEventListener('click', _=>{
+document.getElementById("openFileSubmit").addEventListener('click', _ => {
     var path = $('#fileInput')[0].files[0].path;
     loadData(path);
 });
 
-document.getElementById('saveFileSubmit').addEventListener('click', _=>{
-    ipc.send('save-json', app.tasks);
+document.getElementById('saveFileSubmit').addEventListener('click', _ => {
+    dialog.showSaveDialog({ filters: [ { name: 'Task List (.json)', extensions: ['json'] } ] }, function (fileName) {
+        console.log(fileName);
+        ipc.send('save-json', [app.tasks, fileName]);
+    }); 
 })
 
 //Recieve Array of Objects 
-ipc.on('obtain-file-content', (event, args) =>{
+ipc.on('obtain-file-content', (event, args) => {
     console.log(args);
     app.tasks.items = args;
     updateView();
 });
 
-function loadData(path){
+function loadData(path) {
     ipc.send('open-json', path);
 }
 
 //Menu Bar
-ipc.on('menu-open', (event, args) =>{
+ipc.on('menu-open', (event, args) => {
     $('#openFile').modal('open');
 });
 
-ipc.on('menu-add', (event, args) =>{
+ipc.on('menu-add', (event, args) => {
     $('#addItem').modal('open');
 });
 
-ipc.on('menu-clear', (event, args) =>{
+ipc.on('menu-clear', (event, args) => {
     app.tasks.items = [];
     updateView();
 });
 
 //Update Form
-function updateView(){
+function updateView() {
     var empty = true;
-    app.tasks.items.forEach(function(item) {
-        if (item.completed == false){
+    app.tasks.items.forEach(function (item) {
+        if (item.completed == false) {
             empty = false;
         }
     }, this);
-    if(empty == true){
+    if (empty == true) {
         $('#tasks').hide()
     }
-    else{
+    else {
         $('#tasks').show()
     }
 }
