@@ -20,7 +20,7 @@ app.on('ready', _=>{
     mainWindow.on('close', _=>{
         console.log('Browser has been closed....');
         mainWindow = null;
-    })
+    });
 
     const menuTemplate = [
         {

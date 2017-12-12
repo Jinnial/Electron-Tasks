@@ -9,6 +9,7 @@ const ipc = electron.ipcRenderer;
 $(document).ready(function(){
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
+    loadData(__dirname + '/tasks.json');
   });
 
 //Vue.js
@@ -17,9 +18,7 @@ var app = new Vue({
     data: {
         //Name, Completed
         tasks:{
-            items: [
-                {name: "Complete Final Project", completed: false, id: 0}
-            ]
+            items: []
         }
     },
     methods: {
@@ -43,7 +42,7 @@ var app = new Vue({
 //Navigation Buttons
 document.getElementById("openFileSubmit").addEventListener('click', _=>{
     var path = $('#fileInput')[0].files[0].path;
-    ipc.send('open-json', path);
+    loadData(path);
 });
 
 document.getElementById('saveFileSubmit').addEventListener('click', _=>{
@@ -52,9 +51,14 @@ document.getElementById('saveFileSubmit').addEventListener('click', _=>{
 
 //Recieve Array of Objects 
 ipc.on('obtain-file-content', (event, args) =>{
+    console.log(args);
     app.tasks.items = args;
     updateView();
 });
+
+function loadData(path){
+    ipc.send('open-json', path);
+}
 
 //Menu Bar
 ipc.on('menu-open', (event, args) =>{
