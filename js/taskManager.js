@@ -61,6 +61,15 @@ ipc.on('menu-open', (event, args) =>{
     $('#openFile').modal('open');
 });
 
+ipc.on('menu-add', (event, args) =>{
+    $('#addItem').modal('open');
+});
+
+ipc.on('menu-clear', (event, args) =>{
+    app.tasks.items = [];
+    updateView();
+});
+
 //Update Form
 function updateView(){
     var empty = true;

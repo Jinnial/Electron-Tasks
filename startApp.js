@@ -11,10 +11,10 @@ var fs =  require('fs');
 app.on('ready', _=>{
     console.log('Browser window is ready....');
     mainWindow = new BrowserWindow({
-        icon: __dirname + '/images/icon.png'
-        // width: 900,
-        // height: 700,
-        // resizable: false
+        icon: __dirname + '/images/icon.png',
+        width: 900,
+        height: 700,
+        resizable: false
     });
     mainWindow.loadURL(`file://${__dirname}/index.html`);
     mainWindow.on('close', _=>{
@@ -24,14 +24,28 @@ app.on('ready', _=>{
 
     const menuTemplate = [
         {
-            label: 'Open',
-            click: () => { mainWindow.webContents.send( 'some-message' ) }
+            label: 'Open File',
+            click: () => { mainWindow.webContents.send( 'menu-open' ) }
+        },
+        {
+            label: 'Add Item',
+            click: () => { mainWindow.webContents.send( 'menu-add' ) }
+        },
+        {
+            label: 'Clear Items',
+            click: () => { mainWindow.webContents.send( 'menu-clear' ) }
+        },
+        {
+            label: 'Developer Tools',
+            click: () => { mainWindow.toggleDevTools() }
+        },
+        {
+            label: 'Close',
+            click: () => { mainWindow.close() }
         }
     ];
     const menu = Menu.buildFromTemplate(menuTemplate);
     Menu.setApplicationMenu(menu);
-
-    webContents.send('menu-open')
 });
 
 //Listeners
