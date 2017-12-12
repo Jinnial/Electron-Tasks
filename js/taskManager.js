@@ -56,6 +56,11 @@ ipc.on('obtain-file-content', (event, args) =>{
     updateView();
 });
 
+//Menu Bar
+ipc.on('menu-open', (event, args) =>{
+    $('#openFile').modal('open');
+});
+
 //Update Form
 function updateView(){
     var empty = true;

@@ -21,6 +21,17 @@ app.on('ready', _=>{
         console.log('Browser has been closed....');
         mainWindow = null;
     })
+
+    const menuTemplate = [
+        {
+            label: 'Open',
+            click: () => { mainWindow.webContents.send( 'some-message' ) }
+        }
+    ];
+    const menu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(menu);
+
+    webContents.send('menu-open')
 });
 
 //Listeners
